@@ -1,17 +1,31 @@
-import { Box } from "@mui/material";
-// import { DataGrid } from "@mui/x-data-grid";
+type propsType = {
+  datasource: any[],
+  gridCols: {
+      key: string,
+      label: string,
+      displayField?: any
+  }[],
+  loading?: boolean
+}
 
+ function LMS_DataGrid(props: propsType) {
 
-function LMS_DataGrid() {
-  return (
+  const { datasource, gridCols, loading } = props
 
-    <Box>
-
-
-    </Box>
-
-
-  )
+  return <>
+      {loading ? <h1>Loading ...</h1> : <table>
+          <thead>
+              {gridCols.map((col, ind) => <th key={ind}>{col.label}</th>)}
+          </thead>
+          <tbody>
+              {datasource.map((rows: any, rowIndex: any) => <tr>
+                  {gridCols.map((col, ind) => <td
+                      key={ind}
+                  >{col.displayField ? col.displayField(rows) : rows[col.key]}</td>)}
+              </tr>)}
+          </tbody>
+      </table>}
+  </>
 }
 
 export default LMS_DataGrid
