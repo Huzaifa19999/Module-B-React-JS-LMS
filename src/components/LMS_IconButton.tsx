@@ -11,7 +11,7 @@ interface IconProps {
 }
 
 function LMS_IconButton(props: IconProps) {
-    const { icon, onClick, label     } = props;
+    const { icon, onClick, label } = props;
 
     return (
         <Button
