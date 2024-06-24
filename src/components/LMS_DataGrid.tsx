@@ -18,7 +18,7 @@ type propsType = {
               {gridCols.map((col, ind) => <th key={ind}>{col.label}</th>)}
           </thead>
           <tbody>
-              {datasource.map((rows: any, rowIndex: any) => <tr>
+              {datasource.map((rows: any) => <tr>
                   {gridCols.map((col, ind) => <td
                       key={ind}
                   >{col.displayField ? col.displayField(rows) : rows[col.key]}</td>)}
