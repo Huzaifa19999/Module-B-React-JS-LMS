@@ -10,19 +10,21 @@ type InpProps = {
     required?:boolean,
     fullWidth?:boolean,
     margin?:string,
+    className:string
 }
 
 
 
 function LMS_Input(props:InpProps) {
 
-    const { label, onChange, value, type, disabled, required, fullWidth, margin } = props 
+    const { label, onChange, value, type, disabled, required, fullWidth, margin, className } = props 
 
   return (
     <>
         <label>
             <TextField 
                    type={type}
+                   className={className}
                    label={label}
                    sx={{margin: {margin}}}
                    onChange={onChange}
