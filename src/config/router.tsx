@@ -24,10 +24,10 @@ function Approuter() {
     <>
     <BrowserRouter>
     <Routes>
-        {/* Dashboard */}
-        <Route path="/" element={<Dashboard/>}></Route>
         {/* Login */}
         <Route path="/login" element={<Login/>}></Route>
+        {/* Dashboard */}
+        <Route path="/" element={<Dashboard/>}></Route>
         {/* Exam */}
         <Route path="/examschedule" element={<Examschedule/>}></Route>
         <Route path="/examresult" element={<Examresult/>}></Route>
