@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 function LMS_DatePicker() {
 
     const  [ selectedDate, setSelectedDate ] = useState<any>()
-    console.log()
+    console.log(selectedDate)
 
   return (
     <>
@@ -17,7 +17,8 @@ function LMS_DatePicker() {
             selected={selectedDate}
             onChange={date => setSelectedDate(date)}
             dateFormat={"yyyy/MM/dd"}
-            maxDate={new Date()} /> 
+            maxDate={new Date()}
+             /> 
     </>
   )
 }

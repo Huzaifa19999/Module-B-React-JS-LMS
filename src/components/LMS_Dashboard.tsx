@@ -20,8 +20,13 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import 'bootstrap/dist/css/bootstrap.css'
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import Admission from '../screens/Admission/admission';
+import LMS_TreeView from './LMS_TreeView';
+
 
 const drawerWidth = 240;
+
 
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
@@ -43,6 +48,7 @@ const closedMixin = (theme: Theme): CSSObject => ({
     width: `calc(${theme.spacing(8)} + 1px)`,
   },
 });
+
 
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -94,16 +100,128 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export default function LMS_Dashboard() {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-
+  const [open, setOpen] = React.useState(true);
+  
   const handleDrawerOpen = () => {
     setOpen(true);
   };
-
+  
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  const [ menu, setMenu ] = React.useState<any>([
+    {
+      name:'admission',
+      route:'admission'
+    },
+    {
+      name:'Teacher',
+      route:'teacher'
+    }
+  ])
+  
+  const [ treeStructure, setTreeStructure] = React.useState([
+    {
+      moduleName:"Student",
+      child: [
+        {
+          name:'Student List',
+          route:'studentlist',
+        },
+        {
+          name:'Student Transfer',
+          route:'transferstudent',
+        },
+      ],
+    },
+    {
+      moduleName:"Teacher",
+      child: [
+        {
+          name:'Teacher List',
+          route:'teacherlist',
+        },
+        {
+          name:'Teacher Allocation',
+          route:'teacherallocation',
+        },
+      ],
+    },
+    {
+      moduleName:"Subjects",
+      child: [
+        {
+          name:'Subject Add/Edit',
+          route:'subjectedit',
+        },
+        {
+          name:'Teacher Allocation',
+          route:'teacherallocation',
+        },
+      ],
+    },
+    {
+      moduleName:"School",
+      child: [
+        {
+          name:'School Registration',
+          route:'schoolregistrastion',
+        },
+        {
+          name:'School Details',
+          route:'schooldetails',
+        },
+      ],
+    },
+    {
+      moduleName:"Syllabus",
+      child: [
+        {
+          name:'Syllabus Form',
+          route:'syllabusform',
+        },
+        {
+          name:'Syllabus Lists',
+          route:'syllabuslist',
+        },
+      ],
+    },
+    {
+      moduleName:"Class",
+      child: [
+        {
+          name:'Class Form',
+          route:'classform',
+        },
+        {
+          name:'Class Lists',
+          route:'classlist',
+        },
+      ],
+    },
+    {
+      moduleName:"Fee",
+      child: [
+        {
+          name:'Fee Structure Form',
+          route:'feestructure',
+        },
+        {
+          name:'Fee Submission',
+          route:'feesubmission',
+        },
+      ],
+    },
+  ])
 
+  const navigate = useNavigate()
+  
+  const navigateScreen = (route:string) => {
+  
+    navigate(`/${route}`)
+  
+  }
+  
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -134,84 +252,29 @@ export default function LMS_Dashboard() {
         </DrawerHeader>
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+          {/* {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => ( */}
+           {menu.map((x:any, index:any) => ( 
+            <ListItem key={index} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
+               onClick={()=>{
+                navigateScreen(x.route)
+               }}
               >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
+                <ListItemIcon>                
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                 </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemText primary={x.name} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
           ))}
         </List>
-        <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
+        <LMS_TreeView treeStructure={treeStructure}/>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
-          enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
-          imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
-          Convallis convallis tellus id interdum velit laoreet id donec ultrices.
-          Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-          adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra
-          nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum
-          leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis
-          feugiat vivamus at augue. At augue eget arcu dictum varius duis at
-          consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
-          sapien faucibus et molestie ac.
-        </Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
-          eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
-          neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
-          tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
-          sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
-          tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
-          gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
-          et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
-          tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-          posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography>
+        <Routes>
+          <Route path='admission' element={<Admission/>}/>
+        </Routes>
       </Box>
     </Box>
   );

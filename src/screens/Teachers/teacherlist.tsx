@@ -1,7 +1,10 @@
+import LMS_DatePicker from "../../components/LMS_DatePicker"
 
 function Teacherlist() {
   return (
-    <div>teacherlist</div>
+    <div>
+      <LMS_DatePicker/>
+    </div>
   )
 }
 

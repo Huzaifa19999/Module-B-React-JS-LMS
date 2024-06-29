@@ -1,40 +1,41 @@
-import { TextField } from "@mui/material"
 
 type InpProps = {
 
     label:string,
-    onChange:() => void,
-    value:string,
+    onChange:(e:any) => void,
+    value:any,
     type?:string,
-    disabled?:boolean,
-    required?:boolean,
-    fullWidth?:boolean,
+    // disabled?:true,
+    required?:true,
+    // fullWidth?:boolean,
     margin?:string,
     className:string
+    placeholder:string
 }
 
 
 
 function LMS_Input(props:InpProps) {
 
-    const { label, onChange, value, type, disabled, required, fullWidth, margin, className } = props 
+    const { placeholder, onChange, value, type,  required, className, label } = props 
 
   return (
-    <>
-        <label>
-            <TextField 
+    <div>
+           <label className="form-label">{label}</label>
+            <input 
                    type={type}
                    className={className}
-                   label={label}
-                   sx={{margin: {margin}}}
+                   placeholder={placeholder}
+                  //  label={label}
+                  //  sx={{margin: {margin}}}
                    onChange={onChange}
                    value={value}
-                   disabled={disabled}
+                  //  disabled={disabled}
                    required={required}
-                   style={{width : fullWidth ? '100%' : 'auto' }}
-                   variant="standard"/>
-        </label>
-    </>
+                  //  style={{width : fullWidth ? '100%' : 'auto' }}
+                  //  variant="standard"
+                   />
+    </div>
   )
 }
 

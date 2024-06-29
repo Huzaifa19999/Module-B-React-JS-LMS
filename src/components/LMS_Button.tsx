@@ -2,21 +2,24 @@ type btnProps = {
 
     label:string,
     className:string,
-    onClick:()=>void,
-    disabled?:boolean
+    onClick:(e:any)=>void,
+    disabled?:boolean,
+    type:any
 }
 
 function LMS_Button(props:btnProps) {
 
-const { label, className, disabled, onClick } = props
+const { label, className, disabled, onClick, type } = props
 
   return (
     <>
     <button 
             className={className} 
             disabled={disabled} 
-            onClick={onClick} >
+            onClick={onClick}
+            type={type} >
             {label}
+            
 
     </button>
     </>
