@@ -4,16 +4,17 @@ type propsType = {
       key: string,
       label: string,
       displayField?: any
-  }[],
-  loading?: boolean
+    }[],
+    loading?: boolean
+    className:string,
 }
 
  function LMS_DataGrid(props: propsType) {
 
-  const { datasource, gridCols, loading } = props
+  const { datasource, gridCols, loading, className } = props
 
   return <>
-      {loading ? <h1>Loading ...</h1> : <table>
+      {loading ? <h1>Loading ...</h1> : <table className={className}>
           <thead>
               {gridCols.map((col, ind) => <th key={ind}>{col.label}</th>)}
           </thead>

@@ -15,7 +15,7 @@ export default function LMS_TreeView({treeStructure}:any) {
     const navigate = useNavigate();
     
     const navigateScreen = (route:string) => {
-        navigate(`/${route}`);
+        navigate(`/home/${route}`);
     };
     
     return(

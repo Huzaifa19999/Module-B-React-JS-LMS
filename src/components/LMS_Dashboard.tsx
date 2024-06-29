@@ -23,6 +23,23 @@ import 'bootstrap/dist/css/bootstrap.css'
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import Admission from '../screens/Admission/admission';
 import LMS_TreeView from './LMS_TreeView';
+import Studentlist from '../screens/Student/studentlist';
+import Studentedit from '../screens/Student/studentedit';
+import Teacherlist from '../screens/Teachers/teacherlist';
+import Teacherallocation from '../screens/Teachers/teacherallocation';
+import Subjectedit from '../screens/Subjects/subjectedit';
+import Subjectlist from '../screens/Subjects/subjectlist';
+import Registration from '../screens/School/registration';
+import SchoolDetail from '../screens/School/schooldetail';
+import Syllabusform from '../screens/Syllabus/syllabusform';
+import Syllabuslist from '../screens/Syllabus/syllabuslist';
+import Classform from '../screens/Class/classform';
+import Classlist from '../screens/Class/classlist';
+import Feestructure from '../screens/Fees/feestructure';
+import Feesubmission from '../screens/Fees/feesubmission';
+import Feevoucher from '../screens/Fees/feevoucher';
+import Examschedule from '../screens/Exam/examschedule';
+import Examresult from '../screens/Exam/examresult';
 
 
 const drawerWidth = 240;
@@ -109,7 +126,7 @@ export default function LMS_Dashboard() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const [ menu, setMenu ] = React.useState<any>([
+  const [ menu ] = React.useState<any>([
     {
       name:'admission',
       route:'admission'
@@ -120,7 +137,16 @@ export default function LMS_Dashboard() {
     }
   ])
   
-  const [ treeStructure, setTreeStructure] = React.useState([
+  const [ treeStructure] = React.useState([
+    {
+      moduleName:"Admission",
+      child: [
+        {
+          name:'Admission',
+          route:'admission',
+        }
+      ],
+    },
     {
       moduleName:"Student",
       child: [
@@ -155,8 +181,8 @@ export default function LMS_Dashboard() {
           route:'subjectedit',
         },
         {
-          name:'Teacher Allocation',
-          route:'teacherallocation',
+          name:'Subject List',
+          route:'subjectlist',
         },
       ],
     },
@@ -210,6 +236,23 @@ export default function LMS_Dashboard() {
           name:'Fee Submission',
           route:'feesubmission',
         },
+        {
+          name:'Fee Voucher',
+          route:'feevoucher',
+        },
+      ],
+    },
+    {
+      moduleName:"Examination",
+      child: [
+        {
+          name:'Exam Schedule ',
+          route:'examschedule',
+        },
+        {
+          name:'Exam Result',
+          route:'examresult',
+        },
       ],
     },
   ])
@@ -218,7 +261,7 @@ export default function LMS_Dashboard() {
   
   const navigateScreen = (route:string) => {
   
-    navigate(`/${route}`)
+    navigate(`/home/${route}`)
   
   }
   
@@ -274,6 +317,24 @@ export default function LMS_Dashboard() {
         <DrawerHeader />
         <Routes>
           <Route path='admission' element={<Admission/>}/>
+          <Route path='studentlist' element={<Studentlist/>}/>
+          <Route path='transferstudent' element={<Studentedit/>}/>
+          <Route path='teacherlist' element={<Teacherlist/>}/>
+          <Route path='teacherallocation' element={<Teacherallocation/>}/>
+          <Route path='subjectedit' element={<Subjectedit/>}/>
+          <Route path='subjectlist' element={<Subjectlist/>}/>
+          <Route path='schoolregistration' element={<Registration/>}/>
+          <Route path='schooldetail' element={<SchoolDetail/>}/>
+          <Route path='syllabusform' element={<Syllabusform/>}/>
+          <Route path='syllabusdetail' element={<Syllabuslist/>}/>
+          <Route path='syllabusdetail' element={<Syllabuslist/>}/>
+          <Route path='classform' element={<Classform/>}/>
+          <Route path='classlist' element={<Classlist/>}/>
+          <Route path='feestructure' element={<Feestructure/>}/>
+          <Route path='feesubmission' element={<Feesubmission/>}/>
+          <Route path='feevoucher' element={<Feevoucher/>}/>
+          <Route path='examschedule' element={<Examschedule/>}/>
+          <Route path='examresult' element={<Examresult/>}/>
         </Routes>
       </Box>
     </Box>

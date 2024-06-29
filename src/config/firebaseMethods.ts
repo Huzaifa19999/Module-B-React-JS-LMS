@@ -1,4 +1,4 @@
-import { getDatabase, onValue, push, ref, remove, set } from "firebase/database";
+import { getDatabase, onValue, push, ref, set } from "firebase/database";
 import app from "./firebaseConfig";
 
 
@@ -42,21 +42,23 @@ export const getData = (nodeName:any, id?:any) => {
     });
 };
 
-const deleteData = (nodeName:string,id:any) => {
+// const deleteData = (nodeName:string,id:any) => {
 
-    return new Promise((resolve,reject) => {
-        const reference = ref(db, `${nodeName}/${id}`);
-        remove(reference)
-        .then(()=>{
-            resolve(id)
-        })
-        .catch((err)=>{
-            reject(err)
-        })
-    })
-}
+//     return new Promise((resolve,reject) => {
+//         const reference = ref(db, `${nodeName}/${id}`);
+//         remove(reference)
+//         .then(()=>{
+//             resolve(id)
+//         })
+//         .catch((err)=>{
+//             reject(err)
+//         })
+//     })
+// }
 
-const editData = () => {
+// deleteData('login')
+
+// const editData = () => {
     
-}
+// }
 

@@ -1,5 +1,5 @@
-import Approute from './config/approute'
-// import Approuter from './config/router'
+// import Approute from './config/approute'
+import Approuter from './config/router'
 
 
 
@@ -12,7 +12,7 @@ import Approute from './config/approute'
 
   return (
     <>
-    <Approute/>
+    <Approuter/>
     </>
   
 
