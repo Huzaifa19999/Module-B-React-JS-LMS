@@ -5,7 +5,6 @@ import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
 import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
@@ -13,12 +12,6 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import 'bootstrap/dist/css/bootstrap.css'
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import Admission from '../screens/Admission/admission';
@@ -40,6 +33,9 @@ import Feesubmission from '../screens/Fees/feesubmission';
 import Feevoucher from '../screens/Fees/feevoucher';
 import Examschedule from '../screens/Exam/examschedule';
 import Examresult from '../screens/Exam/examresult';
+import { AccountCircle, Book, Dashboard, Group, Logout, MenuBook, Person, Quiz, School, SupervisedUserCircle } from '@mui/icons-material';
+import PaymentIcon from '@mui/icons-material/Payment';
+import Notfound from '../screens/Dashboard/notfound';
 
 
 const drawerWidth = 240;
@@ -118,6 +114,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 export default function LMS_Dashboard() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
+  const navigate = useNavigate()
   
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -126,20 +123,21 @@ export default function LMS_Dashboard() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const [ menu ] = React.useState<any>([
-    {
-      name:'admission',
-      route:'admission'
-    },
-    {
-      name:'Teacher',
-      route:'teacher'
-    }
-  ])
+  // const [ menu ] = React.useState<any>([
+  //   {
+  //     name:'admission',
+  //     route:'admission'
+  //   },
+  //   {
+  //     name:'Teacher',
+  //     route:'teacher'
+  //   }
+  // ])
   
   const [ treeStructure] = React.useState([
     {
       moduleName:"Admission",
+      icon: <AccountCircle/>,
       child: [
         {
           name:'Admission',
@@ -149,6 +147,7 @@ export default function LMS_Dashboard() {
     },
     {
       moduleName:"Student",
+      icon: <Person/>,
       child: [
         {
           name:'Student List',
@@ -162,6 +161,7 @@ export default function LMS_Dashboard() {
     },
     {
       moduleName:"Teacher",
+      icon: <SupervisedUserCircle/>,
       child: [
         {
           name:'Teacher List',
@@ -175,6 +175,7 @@ export default function LMS_Dashboard() {
     },
     {
       moduleName:"Subjects",
+      icon: <MenuBook/>,
       child: [
         {
           name:'Subject Add/Edit',
@@ -188,6 +189,7 @@ export default function LMS_Dashboard() {
     },
     {
       moduleName:"School",
+      icon: <School/>,
       child: [
         {
           name:'School Registration',
@@ -201,6 +203,7 @@ export default function LMS_Dashboard() {
     },
     {
       moduleName:"Syllabus",
+      icon: <Book/>,
       child: [
         {
           name:'Syllabus Form',
@@ -214,6 +217,7 @@ export default function LMS_Dashboard() {
     },
     {
       moduleName:"Class",
+      icon: <Group/>,
       child: [
         {
           name:'Class Form',
@@ -227,6 +231,7 @@ export default function LMS_Dashboard() {
     },
     {
       moduleName:"Fee",
+      icon: <PaymentIcon/>,
       child: [
         {
           name:'Fee Structure Form',
@@ -244,6 +249,7 @@ export default function LMS_Dashboard() {
     },
     {
       moduleName:"Examination",
+      icon: <Quiz/>,
       child: [
         {
           name:'Exam Schedule ',
@@ -257,19 +263,12 @@ export default function LMS_Dashboard() {
     },
   ])
 
-  const navigate = useNavigate()
-  
-  const navigateScreen = (route:string) => {
-  
-    navigate(`/home/${route}`)
-  
-  }
-  
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
-        <Toolbar>
+        <Toolbar  sx={{ justifyContent: 'space-between' }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -282,9 +281,10 @@ export default function LMS_Dashboard() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography className='fw-bold' variant="h4" noWrap component="div">
+          <Typography onClick={()=>navigate("/home")} className='fw-bold' variant="h4" noWrap component="div">
             Learning Management System
           </Typography>
+            <Logout onClick={() => navigate("/")} fontSize='large'/>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -294,28 +294,13 @@ export default function LMS_Dashboard() {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <List>
-          {/* {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => ( */}
-           {menu.map((x:any, index:any) => ( 
-            <ListItem key={index} disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
-               onClick={()=>{
-                navigateScreen(x.route)
-               }}
-              >
-                <ListItemIcon>                
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={x.name} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-        <LMS_TreeView treeStructure={treeStructure}/>
+        <LMS_TreeView  treeStructure={treeStructure}/>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         <Routes>
+          <Route path='home' element={<Dashboard/>}/>
+          <Route path='*' element={<Notfound/>}/>
           <Route path='admission' element={<Admission/>}/>
           <Route path='studentlist' element={<Studentlist/>}/>
           <Route path='transferstudent' element={<Studentedit/>}/>
