@@ -193,7 +193,7 @@ export default function LMS_Dashboard() {
       child: [
         {
           name:'School Registration',
-          route:'schoolregistrastion',
+          route:'schoolregistration',
         },
         {
           name:'School Details',
@@ -309,10 +309,9 @@ export default function LMS_Dashboard() {
           <Route path='subjectedit' element={<Subjectedit/>}/>
           <Route path='subjectlist' element={<Subjectlist/>}/>
           <Route path='schoolregistration' element={<Registration/>}/>
-          <Route path='schooldetail' element={<SchoolDetail/>}/>
+          <Route path='schooldetails' element={<SchoolDetail/>}/>
           <Route path='syllabusform' element={<Syllabusform/>}/>
-          <Route path='syllabusdetail' element={<Syllabuslist/>}/>
-          <Route path='syllabusdetail' element={<Syllabuslist/>}/>
+          <Route path='syllabuslist' element={<Syllabuslist/>}/>
           <Route path='classform' element={<Classform/>}/>
           <Route path='classlist' element={<Classlist/>}/>
           <Route path='feestructure' element={<Feestructure/>}/>
