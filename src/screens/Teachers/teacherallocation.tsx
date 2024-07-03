@@ -12,13 +12,10 @@ import { sendData } from '../../config/firebaseMethods'
 import { useState } from 'react'
 import LMS_Input from '../../components/LMS_Input'
 import LMS_Button from '../../components/LMS_Button'
-import { useNavigate } from 'react-router-dom'
-import '../Admission/admission.css'; // Import your custom CSS file
-import LMS_Dashboard from '../../components/LMS_Dashboard'
+import '../Admission/admission.css';
 import LMS_DatePicker from '../../components/LMS_DatePicker'
 
 function Teacherallocation() {
-  const navigate = useNavigate();
 
   const [name, setName] = useState<string>("");
   const [fname, setFname] = useState<string>("");
@@ -55,10 +52,8 @@ function Teacherallocation() {
 
   return (
     <>
-      <LMS_Dashboard/>
     <div className="admission-form container w-50 mt-5">
       {/* <center> */}
-        <button onClick={() => navigate('/home')} className='btn btn-primary mb-4'>Dashboard</button>
 
         <form onSubmit={sumbitData} className="w-75 mx-auto">
           <div className="mb-3 fw-bold">
@@ -140,6 +135,7 @@ function Teacherallocation() {
               onChange={(e) => setHobby(e.target.value)} 
               label='Enter your Hobby'            />
           </div>
+            <label className='fw-bold'>Admission Date</label>
           <LMS_DatePicker/>
           <LMS_Button className='btn btn-primary' onClick={sumbitData} label='Click for Admission' type={undefined} />
         </form>

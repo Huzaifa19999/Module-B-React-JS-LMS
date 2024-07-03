@@ -3,12 +3,12 @@ import { sendData } from '../../config/firebaseMethods'
 import { useState } from 'react'
 import LMS_Input from '../../components/LMS_Input'
 import LMS_Button from '../../components/LMS_Button'
-import { useNavigate } from 'react-router-dom'
-import './admission.css'; // Import your custom CSS file
-// import LMS_Dashboard from '../../components/LMS_Dashboard'
+import { Link } from 'react-router-dom'
+import './admission.css'; 
+import LMS_Select from '../../components/LMS_Select'
+
 
 function Admission() {
-  const navigate = useNavigate();
 
   const [name, setName] = useState<string>("");
   const [fname, setFname] = useState<string>("");
@@ -18,6 +18,19 @@ function Admission() {
   const [grade, setGrade] = useState<number | string>("");
   const [lastQualification, setLastQualification] = useState<string>("");
   const [hobby, setHobby] = useState<string>("");
+
+  const options = [
+    // { value: '', label: 'Select your Class',},
+    { value: '1', label: 'Class 1' },
+    { value: '2', label: 'Class 2' },
+    { value: '3', label: 'Class 3' },
+    { value: '4', label: 'Class 4' },
+
+  ];
+
+  const handleSelectChange = (value: string | number) => {
+    setGrade(value);
+  };
 
   const sumbitData = (e: any) => {
     e.preventDefault();
@@ -33,7 +46,7 @@ function Admission() {
       Hobby: hobby
     };
 
-    sendData('Jawan', obj)
+    sendData('Student Data', obj)
       .then((res) => {
         console.log("Admission Successfully", res);
         alert("Admission Successfully");
@@ -44,12 +57,10 @@ function Admission() {
 
   return (
     <>
-      {/* <LMS_Dashboard/> */}
-    <div className="admission-form container w-50 mt-5">
-      {/* <center> */}
-        <button onClick={() => navigate('/home')} className='btn btn-primary mb-4'>Dashboard</button>
+    <h1 className='text-center fw-bold'>Admission</h1>
+    <div className="admission-form container mt-5">
 
-        <form onSubmit={sumbitData} className="w-75 mx-auto">
+        <form onSubmit={sumbitData} className="">
           <div className="mb-3 fw-bold">
             <LMS_Input
               className="form-control"
@@ -111,13 +122,13 @@ function Admission() {
               />
           </div>
           <div className="mb-3 fw-bold">
-            <LMS_Input
-              className="form-control"
-              value={grade}
-              placeholder="Enter your Class"
-              required
-              onChange={(e) => setGrade(e.target.value)}
-              label='Enter your Class'
+            <label>Enter Your Class</label>
+            <br />
+          <LMS_Select
+            options={options}
+            value={grade}
+            onChange={handleSelectChange}
+            className='admission-select form-control'
             />
           </div>
           <div className="mb-3 fw-bold">
@@ -131,7 +142,8 @@ function Admission() {
           </div>
           <LMS_Button className='btn btn-primary' onClick={sumbitData} label='Click for Admission' type={undefined} />
         </form>
-      {/* </center> */}
+    <br />
+<Link to='/home/studentlist'><h5 className='text-center fw-bold' >Check your name in Student List</h5></Link>
     </div>
               </>
   )

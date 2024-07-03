@@ -1,9 +1,11 @@
-import { getDatabase, onValue, push, ref, set } from "firebase/database";
+import { getDatabase, onValue, push, ref, set, remove } from "firebase/database";
 import app from "./firebaseConfig";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 
 
 
 const db = getDatabase(app);
+const auth = getAuth(app)
 
 export const sendData = (nodeName:string,data:any) => {
 
@@ -42,23 +44,34 @@ export const getData = (nodeName:any, id?:any) => {
     });
 };
 
-// const deleteData = (nodeName:string,id:any) => {
+export  const deleteData = (nodeName:string,id?:any) => {
 
-//     return new Promise((resolve,reject) => {
-//         const reference = ref(db, `${nodeName}/${id}`);
-//         remove(reference)
-//         .then(()=>{
-//             resolve(id)
-//         })
-//         .catch((err)=>{
-//             reject(err)
-//         })
-//     })
-// }
+    return new Promise((resolve,reject) => {
+        const reference = ref(db, `${nodeName}/${id ? id : ""}`);
+        remove(reference)
+        .then(()=>{
+            resolve(id)
+        })
+        .catch((err)=>{
+            reject(err)
+        })
+    })
+}
 
-// deleteData('login')
 
 // const editData = () => {
     
 // }
+
+
+export const signUpUser = (email:string,password:string) => {
+
+    createUserWithEmailAndPassword(auth,email,password)
+    .then((res)=>{
+        console.log(res,"Sign Up Successfully")
+    }).catch((err)=>{
+        console.log(err,'Error cannot Signup')
+    })
+
+}
 

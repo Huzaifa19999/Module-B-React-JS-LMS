@@ -4,13 +4,15 @@ import { useState } from 'react';
 import './login.css';
 import { useNavigate } from 'react-router-dom';
 // import LMS_Button from '../../components/LMS_Button';
-import { sendData } from '../../config/firebaseMethods';
+import { sendData, signUpUser } from '../../config/firebaseMethods';
 import { Button } from '@mui/material';
 
 function Login() {
-  const [email, setEmail] = useState<string|number>('');
-  const [password, setPassword] = useState<string|number>('');
+  const [email, setEmail] = useState<any>('');
+  const [password, setPassword] = useState<any>('');
   const navigate = useNavigate();
+
+
 
   const enterLogin = (e: any) => {
     e.preventDefault();
@@ -19,11 +21,13 @@ function Login() {
         Email: email,
         Password: password
       };
+
+      signUpUser(email,password)
       
       sendData('Login', obj)
       .then((res) => {
         console.log("Successfully Added", res);
-        navigate('/home');
+        navigate('/home/user');
         alert("Successfully Log In");
       })
       .catch((err) => {

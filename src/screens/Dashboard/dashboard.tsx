@@ -3,7 +3,7 @@ import LMS_Dashboard from '../../components/LMS_Dashboard'
 function Dashboard() {
   return (
     <>
-    <LMS_Dashboard/>
+    <LMS_Dashboard/>  
     </>
   )
 }

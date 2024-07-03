@@ -12,7 +12,7 @@ function LMS_DatePicker() {
   return (
     <>
         <DatePicker
-            className='fw-bold ms-4 p-2'
+            className='fw-bold form-control p-2'
             placeholderText='Click to Enter Date'
             selected={selectedDate}
             onChange={date => setSelectedDate(date)}

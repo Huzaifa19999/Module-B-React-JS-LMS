@@ -7,9 +7,8 @@ function Approuter() {
     <>
     <BrowserRouter>
     <Routes>
-        <Route path='/home/*' element={<Dashboard/>}/>
         <Route path='/' element={<Login/>}/>
-        
+        <Route path='/home/*' element={<Dashboard/>}/>
     </Routes>
     </BrowserRouter>
     </>
