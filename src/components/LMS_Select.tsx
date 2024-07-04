@@ -9,7 +9,9 @@ type SelectProps =  {
 
 function LMS_Select (props:SelectProps) {
 
-    const { options, value, onChange, className } = props
+    
+
+    const {  options, value, onChange, className } = props
 
   const ClickChange = (event: ChangeEvent<HTMLSelectElement>) => {
     onChange(event.target.value);

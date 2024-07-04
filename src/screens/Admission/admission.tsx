@@ -20,7 +20,6 @@ function Admission() {
   const [hobby, setHobby] = useState<string>("");
 
   const options = [
-    // { value: '', label: 'Select your Class',},
     { value: '1', label: 'Class 1' },
     { value: '2', label: 'Class 2' },
     { value: '3', label: 'Class 3' },
@@ -138,7 +137,8 @@ function Admission() {
               placeholder="Enter your Hobby"
               required
               onChange={(e) => setHobby(e.target.value)} 
-              label='Enter your Hobby'            />
+              label='Enter your Hobby'
+                          />
           </div>
           <LMS_Button className='btn btn-primary' onClick={sumbitData} label='Click for Admission' type={undefined} />
         </form>

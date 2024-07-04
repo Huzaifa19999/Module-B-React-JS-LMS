@@ -13,32 +13,41 @@ import { useState } from 'react'
 import LMS_Input from '../../components/LMS_Input'
 import LMS_Button from '../../components/LMS_Button'
 import '../Admission/admission.css';
-import LMS_DatePicker from '../../components/LMS_DatePicker'
+import LMS_Select from '../../components/LMS_Select'
 
 function Teacherallocation() {
 
-  const [name, setName] = useState<string>("");
-  const [fname, setFname] = useState<string>("");
-  const [age, setAge] = useState<string | number>("");
+  const [teacherName, setTeacherName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
+  const [subject, setSubject] = useState<string>("");
   const [grade, setGrade] = useState<number | string>("");
-  const [lastQualification, setLastQualification] = useState<string>("");
-  const [hobby, setHobby] = useState<string>("");
+
+  const options = [
+
+    { value: '1', label: 'Class 1' },
+    { value: '2', label: 'Class 2' },
+    { value: '3', label: 'Class 3' },
+    { value: '4', label: 'Class 4' },
+
+  ];
+
+  const handleSelectChange = ( value: string | number ) => {  
+
+    setGrade(value)
+
+  }
 
   const sumbitData = (e: any) => {
     e.preventDefault();
 
     let obj = {
-      name: name,
-      Father_Name: fname,
-      Age: age,
+      name: teacherName,
       Email: email,
       Mobile: phone,
       Class: grade,
-      Last_Qualification: lastQualification,
-      Hobby: hobby,
-
+      Subject:subject
+  
     };
 
     sendData('Teacher Data', obj)
@@ -52,91 +61,63 @@ function Teacherallocation() {
 
   return (
     <>
-    <div className="admission-form container w-50 mt-5">
+    <h1 className='text-center fw-bold'>Teacher Information</h1>
+    <div className="admission-form container mt-5">
       {/* <center> */}
 
-        <form onSubmit={sumbitData} className="w-75 mx-auto">
+        <form onSubmit={sumbitData} className='container'>
           <div className="mb-3 fw-bold">
             <LMS_Input
               className="form-control"
-              value={name}
-              placeholder="Enter your Name"
+              value={teacherName}
+              placeholder="Enter Teacher Name"
               required
-              onChange={(e) => setName(e.target.value)}
-              label='Enter your name'
+              onChange={(e) => setTeacherName(e.target.value)}
+              label='Enter Teacher name'
             />
           </div>
-          <div className="mb-3 fw-bold">
-            <LMS_Input
-              className="form-control"
-              value={fname}
-              placeholder="Enter your Father Name"
-              required
-              onChange={(e) => setFname(e.target.value)}
-              label='Enter your Father Name'
-            />
-          </div>
-          <div className="mb-3 fw-bold">
-            <LMS_Input
-              className="form-control"
-              value={age}
-              placeholder="Enter your Age"
-              required
-              onChange={(e) => setAge(e.target.value)}
-              label='Enter your Age'
-            />
-          </div>
+
+          
           <div className="mb-3 fw-bold">
             <LMS_Input
               className="form-control"
               value={email}
-              placeholder="Enter your Email"
+              placeholder="Enter Email"
               required
               onChange={(e) => setEmail(e.target.value)}
-              label='Enter your Email'
+              label='Enter Email'
             />
           </div>
           <div className="mb-3 fw-bold">
             <LMS_Input
               className="form-control"
               value={phone}
-              placeholder="Enter your Mobile Number"
+              placeholder="Enter  Mobile Number"
               required
               onChange={(e) => setPhone(e.target.value)}
-              label='Enter your Mobile Number'
+              label='Enter Mobile Number'
+            />
+          </div>
+           <div className="mb-3 fw-bold">
+            <label>Enter Your Class</label>
+            <br />
+          <LMS_Select
+            options={options}
+            value={grade}
+            onChange={handleSelectChange}
+            className='admission-select form-control'
             />
           </div>
           <div className="mb-3 fw-bold">
             <LMS_Input
               className="form-control"
-              value={lastQualification}
-              placeholder="Enter your Last Qualification"
+              value={subject}
+              placeholder="Enter Subject"
               required
-              onChange={(e) => setLastQualification(e.target.value)}
-              label='Enter your Last Qualification'
-              />
-          </div>
-          <div className="mb-3 fw-bold">
-            <LMS_Input
-              className="form-control"
-              value={grade}
-              placeholder="Enter your Class"
-              required
-              onChange={(e) => setGrade(e.target.value)}
-              label='Enter your Class'
+              onChange={(e) => setSubject(e.target.value)}
+              label='Enter Subject'
             />
-          </div>
-          <div className="mb-3 fw-bold">
-            <LMS_Input
-              className="form-control"
-              value={hobby}
-              placeholder="Enter your Hobby"
-              required
-              onChange={(e) => setHobby(e.target.value)} 
-              label='Enter your Hobby'            />
-          </div>
-            <label className='fw-bold'>Admission Date</label>
-          <LMS_DatePicker/>
+          </div>  
           <LMS_Button className='btn btn-primary' onClick={sumbitData} label='Click for Admission' type={undefined} />
         </form>
       {/* </center> */}
