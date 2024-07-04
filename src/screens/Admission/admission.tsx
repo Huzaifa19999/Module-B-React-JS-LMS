@@ -20,6 +20,7 @@ function Admission() {
   const [hobby, setHobby] = useState<string>("");
 
   const options = [
+    { value: '', label: 'Select your Class',},
     { value: '1', label: 'Class 1' },
     { value: '2', label: 'Class 2' },
     { value: '3', label: 'Class 3' },
@@ -121,16 +122,6 @@ function Admission() {
               />
           </div>
           <div className="mb-3 fw-bold">
-            <label>Enter Your Class</label>
-            <br />
-          <LMS_Select
-            options={options}
-            value={grade}
-            onChange={handleSelectChange}
-            className='admission-select form-control'
-            />
-          </div>
-          <div className="mb-3 fw-bold">
             <LMS_Input
               className="form-control"
               value={hobby}
@@ -139,6 +130,15 @@ function Admission() {
               onChange={(e) => setHobby(e.target.value)} 
               label='Enter your Hobby'
                           />
+                          <br />
+          <div className="mb-3 fw-bold">
+          <LMS_Select
+            className='form-control'
+            options={options}
+            value={grade}
+            onChange={handleSelectChange}
+            />
+          </div>
           </div>
           <LMS_Button className='btn btn-primary' onClick={sumbitData} label='Click for Admission' type={undefined} />
         </form>

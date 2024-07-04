@@ -25,6 +25,7 @@ function Teacherallocation() {
 
   const options = [
 
+    { value: '', label: 'Select your Class' },
     { value: '1', label: 'Class 1' },
     { value: '2', label: 'Class 2' },
     { value: '3', label: 'Class 3' },
@@ -98,16 +99,6 @@ function Teacherallocation() {
               label='Enter Mobile Number'
             />
           </div>
-           <div className="mb-3 fw-bold">
-            <label>Enter Your Class</label>
-            <br />
-          <LMS_Select
-            options={options}
-            value={grade}
-            onChange={handleSelectChange}
-            className='admission-select form-control'
-            />
-          </div>
           <div className="mb-3 fw-bold">
             <LMS_Input
               className="form-control"
@@ -118,6 +109,14 @@ function Teacherallocation() {
               label='Enter Subject'
             />
           </div>  
+           <div className="mb-3 fw-bold">
+          <LMS_Select
+            options={options}
+            value={grade}
+            onChange={handleSelectChange}
+            className='admission-select form-control'
+            />
+          </div>
           <LMS_Button className='btn btn-primary' onClick={sumbitData} label='Click for Admission' type={undefined} />
         </form>
       {/* </center> */}

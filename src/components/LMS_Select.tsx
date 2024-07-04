@@ -19,7 +19,6 @@ function LMS_Select (props:SelectProps) {
 
   return (
     <select  className={className} value={value} onChange={ClickChange}>
-     {value === '' && <option disabled>Select your Class</option>}
       {options.map((option) => (
         <option key={option.value} value={option.value}>
           {option.label}

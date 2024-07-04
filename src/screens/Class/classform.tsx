@@ -1,5 +1,6 @@
 import {  useState } from "react";
 import LMS_SelectWithFirebaseDatabase from "../../components/LMS_SelectWithFirebaseDatabase";
+import { TextField } from "@mui/material";
 
 function Classform() {
   // const [options, setOptions] = useState<any[]>([]); 
@@ -43,6 +44,13 @@ function Classform() {
   </div>
 
   <div>
+  <TextField
+        color="error"
+        variant="outlined"
+        fullWidth={true}
+        label='Enter Name'
+        multiline={true}
+      />
  
   </div>
 
