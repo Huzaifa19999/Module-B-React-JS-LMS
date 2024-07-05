@@ -1,7 +1,11 @@
 
 function Syllabusform() {
   return (
-    <div>Syllabusform</div>
+    <>
+      Syllabus Form
+    </>
+
+
   )
 }
 

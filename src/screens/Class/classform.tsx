@@ -1,25 +1,25 @@
-import {  useState } from "react";
+import {  useState,useEffect } from "react";
 import LMS_SelectWithFirebaseDatabase from "../../components/LMS_SelectWithFirebaseDatabase";
-import { TextField } from "@mui/material";
+import { getData } from "../../config/firebaseMethods";
 
 function Classform() {
-  // const [options, setOptions] = useState<any[]>([]); 
-  const [data, setData] = useState<any>([]); 
+  const [  , setTeacher] = useState<any[]>([]); 
+  const [teacherData, setTeacherData] = useState<any>([]); 
 
 
-  // useEffect(() => {
-  //   getData('Student Data')
-  //     .then((response: any) => {
-  //       console.log(Object.values(response));
-  //       setOptions(Object.values(response));
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
+  useEffect(() => {
+    getData('Teacher Data')
+      .then((response: any) => {
+        console.log(Object.values(response));
+        setTeacher(Object.values(response));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const handleClassChange = (selectedValue: string) => {
-    setData(selectedValue);
+    setTeacherData(selectedValue);
   };
 
 
@@ -38,21 +38,12 @@ function Classform() {
   <LMS_SelectWithFirebaseDatabase
         onChange={handleClassChange}
         className="form-control"
-        nodeName="Student Data"
-        value={data}
+        nodeName="Teacher Data"
+        value={teacherData}
       />
   </div>
 
-  <div>
-  <TextField
-        color="error"
-        variant="outlined"
-        fullWidth={true}
-        label='Enter Name'
-        multiline={true}
-      />
  
-  </div>
 
 
   

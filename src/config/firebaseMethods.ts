@@ -1,4 +1,4 @@
-import { getDatabase, onValue, push, ref, set, remove } from "firebase/database";
+import { getDatabase, onValue, push, ref, set, remove, update } from "firebase/database";
 import app from "./firebaseConfig";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 
@@ -23,9 +23,6 @@ export const sendData = (nodeName:string,data:any) => {
     });
 }
 
-
-
-
 export const getData = (nodeName:any, id?:any) => {
 
     return new Promise((resolve,reject) => {
@@ -44,24 +41,32 @@ export const getData = (nodeName:any, id?:any) => {
     });
 };
 
-export  const deleteData = (nodeName:string,id?:any) => {
+export const deleteData = (nodeName:string,id:string) => {
 
-    return new Promise((resolve,reject) => {
+    return new Promise<void>((resolve, reject) => {
+            
         const reference = ref(db, `${nodeName}/${id ? id : ""}`);
         remove(reference)
         .then(()=>{
-            resolve(id)
-        })
-        .catch((err)=>{
+           resolve()
+        }).catch((err)=>{
             reject(err)
         })
     })
 }
 
 
-// const editData = () => {
-    
-// }
+export const editData = (nodeName:string,id:string,updatedData:any) => {
+    return new Promise<void>((resolve, reject) => {        
+        const reference = ref(db, `${nodeName}/${id}`);
+        update(reference,updatedData)
+        .then(()=>{
+            resolve(updatedData)
+        }).catch((err)=>{
+            reject(err)
+        });
+    });
+}
 
 
 export const signUpUser = (email:string,password:string) => {

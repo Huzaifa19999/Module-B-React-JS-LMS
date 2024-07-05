@@ -104,7 +104,6 @@ function Teacherallocation() {
               className="form-control"
               value={subject}
               placeholder="Enter Subject"
-              required
               onChange={(e) => setSubject(e.target.value)}
               label='Enter Subject'
             />
