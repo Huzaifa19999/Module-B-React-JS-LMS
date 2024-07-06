@@ -38,11 +38,12 @@ function Classform() {
   <LMS_SelectWithFirebaseDatabase
         onChange={handleClassChange}
         className="form-control"
-        nodeName="Teacher Data"
+        nodeName="Student Data"
         value={teacherData}
       />
   </div>
 
+        {teacherData}
  
 
 

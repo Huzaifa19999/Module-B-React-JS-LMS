@@ -18,6 +18,7 @@ function Admission() {
   const [grade, setGrade] = useState<number | string>("");
   const [lastQualification, setLastQualification] = useState<string>("");
   const [hobby, setHobby] = useState<string>("");
+  const  [  status ] = useState<string>("");
 
   const options = [
     { value: '', label: 'Select your Class',},
@@ -43,7 +44,8 @@ function Admission() {
       Mobile: phone,
       Class: grade,
       Last_Qualification: lastQualification,
-      Hobby: hobby
+      Hobby: hobby,
+      Status: status
     };
 
     sendData('Student Data', obj)

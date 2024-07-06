@@ -23,6 +23,9 @@ export const sendData = (nodeName:string,data:any) => {
     });
 }
 
+
+
+
 export const getData = (nodeName:any, id?:any) => {
 
     return new Promise((resolve,reject) => {

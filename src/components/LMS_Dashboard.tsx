@@ -23,8 +23,6 @@ import Subjectedit from '../screens/Subjects/subjectedit';
 import Subjectlist from '../screens/Subjects/subjectlist';
 import Registration from '../screens/School/registration';
 import SchoolDetail from '../screens/School/schooldetail';
-import Syllabusform from '../screens/Syllabus/syllabusform';
-import Syllabuslist from '../screens/Syllabus/syllabuslist';
 import Classform from '../screens/Class/classform';
 import Classlist from '../screens/Class/classlist';
 import Feestructure from '../screens/Fees/feestructure';
@@ -36,6 +34,9 @@ import { AccountCircle, Book, Group, Logout, MenuBook, Person, Quiz, School, Sup
 import PaymentIcon from '@mui/icons-material/Payment';
 import Notfound from '../screens/Dashboard/notfound';
 import User from '../screens/Home/homeuser';
+import '../App.css'
+import MarkAttendance from '../screens/Syllabus/syllabusform';
+import Attendancelist from '../screens/Syllabus/syllabuslist';
 
 const drawerWidth = 240;
 
@@ -185,16 +186,16 @@ export default function LMS_Dashboard() {
       ],
     },
     {
-      moduleName: "Syllabus",
+      moduleName: "Attendance",
       icon: <Book />,
       child: [
         {
-          name: 'Syllabus Form',
-          route: 'syllabusform',
+          name: 'Mark Attandance',
+          route: 'markattendance',
         },
         {
-          name: 'Syllabus Lists',
-          route: 'syllabuslist',
+          name: 'Attendance Lists',
+          route: 'attendancelist',
         },
       ],
     },
@@ -271,6 +272,7 @@ export default function LMS_Dashboard() {
       </AppBar>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
+          <img className='school-logo mb-5' src={'https://scontent.fkhi2-2.fna.fbcdn.net/v/t39.30808-6/308753025_436126298617443_3406039517104410233_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=W5tSpCgAa6UQ7kNvgEeVoys&_nc_ht=scontent.fkhi2-2.fna&oh=00_AYADkd_a9I7y4_W77V1_xaJVCImz5fzIWtA4jOqVWO_aNg&oe=668DED76'} alt="" />
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
@@ -292,8 +294,8 @@ export default function LMS_Dashboard() {
           <Route path='subjectlist' element={<Subjectlist />} />
           <Route path='schoolregistration' element={<Registration />} />
           <Route path='schooldetails' element={<SchoolDetail />} />
-          <Route path='syllabusform' element={<Syllabusform />} />
-          <Route path='syllabuslist' element={<Syllabuslist />} />
+          <Route path='markattendance' element={<MarkAttendance />} />
+          <Route path='attendancelist' element={<Attendancelist />} />
           <Route path='classform' element={<Classform />} />
           <Route path='classlist' element={<Classlist />} />
           <Route path='feestructure' element={<Feestructure />} />
