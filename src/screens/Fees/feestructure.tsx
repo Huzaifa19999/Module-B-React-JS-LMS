@@ -89,7 +89,7 @@ function Feestructure() {
       </tbody>
       </table>
       <br />
-      <h4 className="text-center fw-bold">Disclaimer: The University reserves the right to change fee structure from time to time.
+      <h4 className="text-center fw-bold">Disclaimer: The Institute reserves the right to change fee structure from time to time.
       </h4>
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <LMS_IconButton onClick={() => { navigate('/home/feesubmission'); } } icon={<Payments />} label="fee submission" className="p-3 fw-bold mt-3 rounded" color=""/>

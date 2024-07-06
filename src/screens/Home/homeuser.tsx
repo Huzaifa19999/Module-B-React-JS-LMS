@@ -11,6 +11,7 @@ function User() {
 
   const [ students , setStudents ] =useState<any>([])  
   const [ teachers , setTeachers ] =useState<any>([])  
+  const [ period , setPeriod ] = useState<any>([])  
 
   useEffect(()=>{
 
@@ -27,6 +28,14 @@ function User() {
     .then((res:any)=>{
       console.log(Object.values(res))
       setTeachers(...[Object.values(res)])
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+    getData('Class Data')
+    .then((res:any)=>{
+      console.log(Object.values(res))
+      setPeriod(...[Object.values(res)])
     })
     .catch((err)=>{
       console.log(err)
@@ -50,7 +59,7 @@ function User() {
           <img src={Classes} alt="" />
           <br />
           <h5 className="mt-3 fw-bold">Total Classes</h5>
-          <h5 className="fw-bold">j</h5>
+          <h5 className="fw-bold">{period.length}</h5>
         </Grid>
         <Grid className="text-center border rounded border-3 p-5" item xs={12} md={3} lg={3}>
           <img src={Teachers} alt="" />

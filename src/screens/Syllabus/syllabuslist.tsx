@@ -33,7 +33,8 @@ function Attendancelist() {
 
   return (
     <>
-    <h1>List of Students {selectedAttendance}</h1>
+    <h1 className="ms-5">List of Students {selectedAttendance}</h1>
+    <br />
       <select
         className="ms-5 attendance form-control text-center fw-bold mb-5"
         onChange={handleFilterChange}

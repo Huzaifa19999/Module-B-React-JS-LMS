@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import { sendData } from '../../config/firebaseMethods'
-import { useState } from 'react'
+import {  useState } from 'react'
 import LMS_Input from '../../components/LMS_Input'
 import LMS_Button from '../../components/LMS_Button'
 import { Link } from 'react-router-dom'
@@ -29,6 +29,7 @@ function Admission() {
 
   ];
 
+       
   const handleSelectChange = (value: string | number) => {
     setGrade(value);
   };
