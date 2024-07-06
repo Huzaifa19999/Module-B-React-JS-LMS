@@ -37,6 +37,12 @@ function Admission() {
   const sumbitData = (e: any) => {
     e.preventDefault();
 
+    if (!name || !fname || !age || !email || !phone || !grade || !lastQualification || !hobby) {
+      alert("Please fill out all fields before submitting.");
+      return;
+    }
+
+
     let obj = {
       name: name,
       Father_Name: fname,
@@ -53,6 +59,14 @@ function Admission() {
       .then((res) => {
         console.log("Admission Successfully", res);
         alert("Admission Successfully");
+        setName("");
+        setFname("");
+        setAge("");
+        setEmail("");
+        setPhone("");
+        setGrade("");
+        setLastQualification("");
+        setHobby("");
       }).catch((err) => {
         console.log("Admission Failed", err);
       });

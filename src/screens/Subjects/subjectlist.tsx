@@ -23,7 +23,7 @@ function Subjectlist() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [selectedClass]);
 
   const handleSelectChange = (value: string | number) => {
     setSelectedClass(value);
