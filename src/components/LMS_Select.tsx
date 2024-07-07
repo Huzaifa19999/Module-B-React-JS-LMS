@@ -1,8 +1,8 @@
 import  { ChangeEvent } from 'react';
 
 type SelectProps =  {
-  options: { value: string | number ; label: string }[];
-  value: string | number ;
+  options: any;
+  value: any ;
   onChange: (value: string | number ) => void;
   className:string
 }
@@ -19,7 +19,7 @@ function LMS_Select (props:SelectProps) {
 
   return (
     <select  className={className} value={value} onChange={ClickChange}>
-      {options.map((option) => (
+      {options.map((option:any) => (
         <option key={option.value} value={option.value}>
           {option.label}
         </option>

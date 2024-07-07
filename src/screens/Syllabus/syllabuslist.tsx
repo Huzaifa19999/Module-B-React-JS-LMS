@@ -15,7 +15,7 @@ function Attendancelist() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [selectedAttendance]);
 
   const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedAttendance(e.target.value);

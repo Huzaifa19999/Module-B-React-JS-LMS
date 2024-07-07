@@ -21,8 +21,6 @@ import Teacherlist from '../screens/Teachers/teacherlist';
 import Teacherallocation from '../screens/Teachers/teacherallocation';
 import Subjectedit from '../screens/Subjects/subjectedit';
 import Subjectlist from '../screens/Subjects/subjectlist';
-import Registration from '../screens/School/registration';
-import SchoolDetail from '../screens/School/schooldetail';
 import Classform from '../screens/Class/classform';
 import Classlist from '../screens/Class/classlist';
 import Feestructure from '../screens/Fees/feestructure';
@@ -30,7 +28,7 @@ import Feesubmission from '../screens/Fees/feesubmission';
 import Feevoucher from '../screens/Fees/feevoucher';
 import Examschedule from '../screens/Exam/examschedule';
 import Examresult from '../screens/Exam/examresult';
-import { AccountCircle, Book, Group, Logout, MenuBook, Person, Quiz, School, SupervisedUserCircle } from '@mui/icons-material';
+import { AccountCircle, Book, Group, Logout, MenuBook, Person, Quiz, SupervisedUserCircle } from '@mui/icons-material';
 import PaymentIcon from '@mui/icons-material/Payment';
 import Notfound from '../screens/Dashboard/notfound';
 import User from '../screens/Home/homeuser';
@@ -172,20 +170,6 @@ export default function LMS_Dashboard() {
       ],
     },
     {
-      moduleName: "School",
-      icon: <School />,
-      child: [
-        {
-          name: 'School Registration',
-          route: 'schoolregistration',
-        },
-        {
-          name: 'School Details',
-          route: 'schooldetails',
-        },
-      ],
-    },
-    {
       moduleName: "Attendance",
       icon: <Book />,
       child: [
@@ -292,8 +276,6 @@ export default function LMS_Dashboard() {
           <Route path='teacherallocation' element={<Teacherallocation />} />
           <Route path='subjectedit' element={<Subjectedit />} />
           <Route path='subjectlist' element={<Subjectlist />} />
-          <Route path='schoolregistration' element={<Registration />} />
-          <Route path='schooldetails' element={<SchoolDetail />} />
           <Route path='markattendance' element={<MarkAttendance />} />
           <Route path='attendancelist' element={<Attendancelist />} />
           <Route path='classform' element={<Classform />} />

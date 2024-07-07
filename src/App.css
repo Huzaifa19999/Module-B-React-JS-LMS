@@ -17,3 +17,10 @@
     width: 200px;
 }
 
+
+.notice {
+    display: flex;
+    flex-direction: column;
+    border: solid 4px black;
+    /* border-radius: 4px; */
+}

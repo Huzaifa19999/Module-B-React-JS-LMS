@@ -1,26 +1,29 @@
-import  { useState } from 'react'
-import DatePicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
-import 'bootstrap/dist/css/bootstrap.css'
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
+type DateProps = {
+  selectedDate: Date | null; 
+  onChange: (date: Date | null) => void; 
+  date:string
+  time:string
+};
+
+function LMS_DatePicker(props: DateProps) {
 
 
-function LMS_DatePicker() {
 
-    const  [ selectedDate, setSelectedDate ] = useState<any>()
-    console.log(selectedDate)
+  const { selectedDate, onChange } = props;
 
   return (
-    <>
-        <DatePicker
-            className='fw-bold form-control p-2'
-            placeholderText='Click to Enter Date'
-            selected={selectedDate}
-            onChange={date => setSelectedDate(date)}
-            dateFormat={"yyyy/MM/dd"}
-            maxDate={new Date()}
-             /> 
-    </>
-  )
+    <DatePicker
+      className='fw-bold form-control p-2'
+      placeholderText='Click to Enter Date'
+      selected={selectedDate}
+      onChange={(date: Date | null) => onChange(date)} 
+      dateFormat={"yyyy/MM/dd"}
+      showTimeInput={false}
+    />
+  );
 }
 
-export default LMS_DatePicker
+export default LMS_DatePicker;

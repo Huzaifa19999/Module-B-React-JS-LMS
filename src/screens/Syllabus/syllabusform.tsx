@@ -9,7 +9,6 @@ function MarkAttendance() {
     getData('Student Data')
       .then((res: any) => {
         setStudents(Object.values(res));
-        // Initialize attendance status for each student
         const initialStatus: any = {};
         Object.values(res).forEach((student: any) => {
           initialStatus[student.id] = '';
@@ -44,6 +43,7 @@ function MarkAttendance() {
       editData('Student Data', id, updatedData)
         .then(() => {
           console.log("Attendance marked successfully");
+          alert("Attendance marked successfully");
         })
         .catch((err) => {
           console.log(err, "Attendance failed");
