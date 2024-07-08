@@ -5,7 +5,7 @@ type InpProps = {
     label:string,
     onChange:(e:any) => void,
     value:any,
-    type?:string,
+    type?:any,
     // disabled?:true,
     required?:true,
     // fullWidth?:boolean,

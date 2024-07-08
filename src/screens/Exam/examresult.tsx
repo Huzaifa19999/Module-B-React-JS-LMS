@@ -17,12 +17,13 @@ function Examresult() {
       console.log(err)
     })
   },[])
+
   
   return (
     <>
-            <table className=" table table-bordered">
+            <table className=" table text-center table-bordered">
               <thead className="">
-              <tr>
+                <tr>
               <th>Name</th>
               <th>Teacher Name</th>
               <th>Class</th>
@@ -35,7 +36,9 @@ function Examresult() {
               <th>Marks in 3rd Subject</th>
               <th>Marks in 4th Subject</th>
               <th>Total Marks</th>
-              </tr>
+              <th>Marks Obtained</th>
+              <th>Percentage</th>
+                </tr>
               </thead>
               <tbody>
              {exam.map((e:any,i:any)=>(
@@ -51,8 +54,10 @@ function Examresult() {
                 <td>{e.mark2}</td>
                 <td>{e.mark3}</td>
                 <td>{e.mark4}</td>
-                <td></td>
-              </tr>
+                <td>400</td>
+                <td>{e.mark1+e.mark2+e.mark3+e.mark4}</td>
+                <td>{((e.mark1+e.mark2+e.mark3+e.mark4)/400)*100}%</td>
+            </tr>
             ))}
             </tbody>
              </table>

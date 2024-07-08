@@ -1,177 +1,210 @@
-import { useEffect, useState } from "react"
-import { getData, sendData } from "../../config/firebaseMethods"
-import LMS_Input from "../../components/LMS_Input"
-import { Button } from "@mui/material"
-import { Quiz } from "@mui/icons-material"
+import { useEffect, useState } from "react";
+import { getData, sendData } from "../../config/firebaseMethods";
+import LMS_Input from "../../components/LMS_Input";
+import { Button } from "@mui/material";
+import { Quiz } from "@mui/icons-material";
+
+type Student = {
+  student: string;
+  Class: string;
+  subject1: string;
+  subject2: string;
+  subject3: string;
+  subject4: string;
+}
+
+type Teacher = {
+  name: string;
+}
+
+type ExamData = {
+  student: string;
+  teacher: string;
+  Class: string;
+  subject1: string;
+  subject2: string;
+  subject3: string;
+  subject4: string;
+  mark1?: number;
+  mark2?: number;
+  mark3?: number;
+  mark4?: number;
+}
 
 function Examschedule() {
-  const [ students, setStudents ] = useState<any>([])
-  const [ selectedStudents, setSelectedStudents ] = useState<any>("")
-  const [ teachers, setTeachers ] = useState<any>([])
-  const [ selectedTeachers, setSelectedTeachers ] = useState<any>("")
-  const [ grade, setGrade ] = useState<any>("")
-  const [ subject1, setSubject1 ] = useState<any>("")
-  const [ subject2, setSubject2 ] = useState<any>("")
-  const [ subject3, setSubject3 ] = useState<any>("")
-  const [ subject4, setSubject4 ] = useState<any>("")
-  const [ mark1, setMarks1 ] = useState<any>("")
-  const [ mark2, setMarks2 ] = useState<any>("")
-  const [ mark3, setMarks3 ] = useState<any>("")
-  const [ mark4, setMarks4 ] = useState<any>("")
+  const [students, setStudents] = useState<Student[]>([]);
+  const [selectedStudent, setSelectedStudent] = useState<string>("");
+  const [teachers, setTeachers] = useState<Teacher[]>([]);
+  const [selectedTeacher, setSelectedTeacher] = useState<string>("");
+  const [grade, setGrade] = useState<string>("");
+  const [subject1, setSubject1] = useState<string>("");
+  const [subject2, setSubject2] = useState<string>("");
+  const [subject3, setSubject3] = useState<string>("");
+  const [subject4, setSubject4] = useState<string>("");
+  const [mark1, setMark1] = useState<string>("");
+  const [mark2, setMark2] = useState<string>("");
+  const [mark3, setMark3] = useState<string>("");
+  const [mark4, setMark4] = useState<string>("");
 
-  useEffect(()=>{
+  useEffect(() => {
     getData('Class Data')
-    .then((res:any)=>{
-      console.log(...[Object.values(res)])
-      setStudents(...[Object.values(res)])
-    }).catch((err)=>{
-      console.log(err)
-    })
+      .then((res: any) => {
+        const classData = Object.values(res) as Student[];
+        setStudents(classData);
+      }).catch((err) => {
+        console.log(err);
+      });
+
     getData('Teacher Data')
-    .then((res:any)=>{
-      console.log(...[Object.values(res)])
-      setTeachers(...[Object.values(res)])
-    }).catch((err)=>{
-      console.log(err)
-    })
-  },[])
+      .then((res: any) => {
+        const teacherData = Object.values(res) as Teacher[];
+        setTeachers(teacherData);
+      }).catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const addExam = () => {
-
-    let obj = {
-
-      student:selectedStudents,
-      teacher:selectedTeachers,
+    const examData: ExamData = {
+      student: selectedStudent,
+      teacher: selectedTeacher,
       Class: grade,
       subject1: subject1,
       subject2: subject2,
       subject3: subject3,
       subject4: subject4,
-      mark1:mark1,
-      mark2:mark2,
-      mark3:mark3,
-      mark4:mark4,
+      mark1: parseInt(mark1),
+      mark2: parseInt(mark2),
+      mark3: parseInt(mark3),
+      mark4: parseInt(mark4),
     };
 
-    sendData('Exam Data',obj)
-    .then((res)=>{
-      console.log(res)
-    }).catch((err)=>{
-      console.log(err)
-    })
-
-  }
+    sendData('Exam Data', examData)
+      .then((res) => {
+        console.log(res);
+      }).catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
-    <>    <div className="border border-3 p-5  rounded-4">
+    <>
+      <div className="border border-3 p-5 rounded-4">
         <h3 className="fw-bold">Select Student Name</h3>
         <br />
-        <select onChange={(e)=>setSelectedStudents(e.target.value)} className="form-control border-3">
+        <select onChange={(e) => setSelectedStudent(e.target.value)} className="form-control border-3">
           <option value="">Select Student</option>
-          {students.map((e:any,i:any)=>(
-            <option key={i} value={e.student}>{e.student}</option>
+          {students.map((student, index) => (
+            <option key={index} value={student.student}>{student.student}</option>
           ))}
         </select>
-          </div>
-        <br />
-        <br />
-           <div className="border border-3 p-5 rounded-4">
+      </div>
+
+      <div className="border border-3 p-5 rounded-4">
         <h3 className="fw-bold">Select Teacher Name</h3>
         <br />
-        <select onChange={(e)=>setSelectedTeachers(e.target.value)} className="form-control border-3">
+        <select onChange={(e) => setSelectedTeacher(e.target.value)} className="form-control border-3">
           <option value="">Select Teacher</option>
-          {teachers.map((e:any,i:any)=>(
-            <option key={i} value={e.name}>{e.name}</option>
+          {teachers.map((teacher, index) => (
+            <option key={index} value={teacher.name}>{teacher.name}</option>
           ))}
         </select>
-        </div>
-        <br />
-        <br />
+      </div>
 
-        <div className="border border-3 p-5 rounded-4">
+      <div className="border border-3 p-5 rounded-4">
         <h3 className="fw-bold">Select Class</h3>
         <br />
-        <select onChange={(e)=>setGrade(e.target.value)} className="form-control border-3">
+        <select onChange={(e) => setGrade(e.target.value)} className="form-control border-3">
           <option value="">Select Class</option>
-          {students.map((e:any,i:any)=>(
-            <option key={i} value={e.Class}>{e.Class}</option>
+          {students.map((student, index) => (
+            <option key={index} value={student.Class}>{student.Class}</option>
           ))}
         </select>
-          </div>
-        <br />
-        <br />
-        <br />
-        <div className="border border-3 p-5 rounded-4">
+      </div>
 
+      <div className="border border-3 p-5 rounded-4">
         <h3 className="fw-bold">Select 1<sup>st</sup> Subject </h3>
-        <select onChange={(e)=>{setSubject1(e.target.value)}} className="form-control border-3">
+        <select onChange={(e) => setSubject1(e.target.value)} className="form-control border-3">
           <option value="">Select 1<sup>st</sup> Subject</option>
-          {students.map((e:any,i:any)=>(
-            <option key={i} value={e.subject1}>{e.subject1}</option>
+          {students.map((student, index) => (
+            <option key={index} value={student.subject1}>{student.subject1}</option>
           ))}
         </select>
         <br />
-          <h3 className="fw-bold">Enter 1<sup>st</sup> Subject Marks </h3>
-              <LMS_Input onChange={(e)=>setMarks1(e.target.value)}  label="Enter 1st Subject Marks" placeholder="Enter 1st Subject Marks" className="form-control border-3" value={mark1}/>
-          </div>
-          <br />
-          <br />
-          <br />
+        <LMS_Input
+          onChange={(e) => setMark1(e.target.value)}
+          label="Enter 1st Subject Marks"
+          placeholder="Enter 1st Subject Marks"
+          className="form-control border-3"
+          value={mark1}
+        />
+      </div>
 
-          <div className="border border-3 p-5 rounded-4">
+      <div className="border border-3 p-5 rounded-4">
         <h3 className="fw-bold">Select 2<sup>nd</sup> Subject </h3>
-        <select onChange={(e)=>{setSubject2(e.target.value)}}  className="form-control border-3">
-        <option value="">Select 2<sup>nd</sup> Subject</option>
-        {students.map((e:any,i:any)=>(
-          <option key={i} value={e.subject2}>{e.subject2}</option>
-        ))}
+        <select onChange={(e) => setSubject2(e.target.value)} className="form-control border-3">
+          <option value="">Select 2<sup>nd</sup> Subject</option>
+          {students.map((student, index) => (
+            <option key={index} value={student.subject2}>{student.subject2}</option>
+          ))}
         </select>
-          <br />
-        <h3 className="fw-bold">Select 2<sup>nd</sup> Subject Marks </h3>
-            <LMS_Input onChange={(e)=>setMarks2(e.target.value)} label="Enter 2nd Subject Marks" placeholder="Enter 2nd Subject Marks" className="form-control border-3" value={mark2} />
-        </div>
-      
         <br />
-        <br />
-        <br />
-          <div className="border border-3 p-5 rounded-4">
+        <LMS_Input
+          onChange={(e) => setMark2(e.target.value)}
+          label="Enter 2nd Subject Marks"
+          placeholder="Enter 2nd Subject Marks"
+          className="form-control border-3"
+          value={mark2}
+        />
+      </div>
 
+      <div className="border border-3 p-5 rounded-4">
         <h3 className="fw-bold">Select 3<sup>rd</sup> Subject </h3>
-        <select onChange={(e)=>{setSubject3(e.target.value)}} className="form-control border-3">
-        <option value="">Select 3<sup>rd</sup> Subject</option>
-        {students.map((e:any,i:any)=>(
-          <option key={i} value={e.subject3}>{e.subject3}</option>
-        ))}
+        <select onChange={(e) => setSubject3(e.target.value)} className="form-control border-3">
+          <option value="">Select 3<sup>rd</sup> Subject</option>
+          {students.map((student, index) => (
+            <option key={index} value={student.subject3}>{student.subject3}</option>
+          ))}
         </select>
         <br />
-        <h3 className="fw-bold">Select 3<sup>rd</sup> Subject Marks </h3>
-            <LMS_Input onChange={(e)=>setMarks3(e.target.value)} label="Enter 3rd Subject Marks" placeholder="Enter 3rd Subject Marks" className="form-control border-3" value={mark3}/>
-        </div>
+        <LMS_Input
+          onChange={(e) => setMark3(e.target.value)}
+          label="Enter 3rd Subject Marks"
+          placeholder="Enter 3rd Subject Marks"
+          className="form-control border-3"
+          value={mark3}
+        />
+      </div>
 
-        <br />
-        <br />
-        <br />
-        <div className="border border-3 p-5 rounded-4">
-
+      <div className="border border-3 p-5 rounded-4">
         <h3 className="fw-bold">Select 4<sup>th</sup> Subject </h3>
-        <select onChange={(e)=>{setSubject4(e.target.value)}} className="form-control border-3">
-        <option value="">Select 4<sup>th</sup> Subject</option>
-        {students.map((e:any,i:any)=>(
-          <option key={i} value={e.subject4}>{e.subject4}</option>
-        ))}
+        <select onChange={(e) => setSubject4(e.target.value)} className="form-control border-3">
+          <option value="">Select 4<sup>th</sup> Subject</option>
+          {students.map((student, index) => (
+            <option key={index} value={student.subject4}>{student.subject4}</option>
+          ))}
         </select>
         <br />
-        <h3 className="fw-bold">Select 4<sup>th</sup> Subject Marks </h3>
-            <LMS_Input label="Enter 4th Subject Marks" placeholder="Enter 4th Subject Marks" className="form-control border-3" value={mark4} onChange={(e)=>setMarks4(e.target.value)}/>
-        <br />
-        </div>
-        <br />
-        <Button size="large" startIcon={<Quiz/>} className="ms-3 fw-bold" variant="contained" onClick={addExam}>CheckOut Result</Button>
+        <LMS_Input
+          onChange={(e) => setMark4(e.target.value)}
+          label="Enter 4th Subject Marks"
+          placeholder="Enter 4th Subject Marks"
+          className="form-control border-3"
+          value={mark4}
+        />
+      </div>
 
-    
-
+      <Button
+        size="large"
+        startIcon={<Quiz />}
+        className="ms-3 fw-bold"
+        variant="contained"
+        onClick={addExam}
+      >
+        CheckOut Result
+      </Button>
     </>
-  )
+  );
 }
 
-export default Examschedule
+export default Examschedule;
