@@ -25,8 +25,6 @@ import Classform from '../screens/Class/classform';
 import Classlist from '../screens/Class/classlist';
 import Feestructure from '../screens/Fees/feestructure';
 import Feesubmission from '../screens/Fees/feesubmission';
-import Feevoucher from '../screens/Fees/feevoucher';
-import Examschedule from '../screens/Exam/examschedule';
 import Examresult from '../screens/Exam/examresult';
 import { AccountCircle, Book, Group, Logout, MenuBook, Person, Quiz, SupervisedUserCircle } from '@mui/icons-material';
 import PaymentIcon from '@mui/icons-material/Payment';
@@ -35,6 +33,8 @@ import User from '../screens/Home/homeuser';
 import '../App.css'
 import MarkAttendance from '../screens/Syllabus/syllabusform';
 import Attendancelist from '../screens/Syllabus/syllabuslist';
+import FeeVoucher from '../screens/Fees/feevoucher';
+import Examschedule from '../screens/Exam/examschedule';
 
 const drawerWidth = 240;
 
@@ -282,7 +282,7 @@ export default function LMS_Dashboard() {
           <Route path='classlist' element={<Classlist />} />
           <Route path='feestructure' element={<Feestructure />} />
           <Route path='feesubmission' element={<Feesubmission />} />
-          <Route path='feevoucher' element={<Feevoucher />} />
+          <Route path='feevoucher' element={<FeeVoucher />} />
           <Route path='examschedule' element={<Examschedule />} />
           <Route path='examresult' element={<Examresult />} />
         </Routes>

@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
-import { getData } from "../../config/firebaseMethods"
+import { deleteData, getData } from "../../config/firebaseMethods"
+import { Button } from "@mui/material"
+import { Delete } from "@mui/icons-material"
 
 function Examresult() {
 
@@ -18,6 +20,15 @@ function Examresult() {
     })
   },[])
 
+  const deleteExam = (id:string) => {
+      deleteData('Exam Data',id)
+      .then(() => {
+        console.log("Result deleted Successfully")
+      }).catch((err)=>{
+        console.log(err)
+      })
+    }
+    
   
   return (
     <>
@@ -57,6 +68,7 @@ function Examresult() {
                 <td>400</td>
                 <td>{e.mark1+e.mark2+e.mark3+e.mark4}</td>
                 <td>{((e.mark1+e.mark2+e.mark3+e.mark4)/400)*100}%</td>
+                <td><Button color="error" variant="contained" startIcon={<Delete/>} onClick={()=>{deleteExam(e.id)}}>Delete</Button></td>
             </tr>
             ))}
             </tbody>

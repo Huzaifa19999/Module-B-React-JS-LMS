@@ -1,159 +1,140 @@
-import axios from "axios";
-import 'bootstrap/dist/css/bootstrap.css'; 
-import { useState } from "react";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
-import CommentIcon from '@mui/icons-material/Comment';
-import PostAddIcon from '@mui/icons-material/PostAdd';
-import LMS_Button from "../../components/LMS_Button";
+import { useEffect, useState } from 'react';
+import { getData, sendData } from '../../config/firebaseMethods';
+import { Button } from '@mui/material';
+import { Payment } from '@mui/icons-material';
 
-function Feevoucher() {
-  const [comment, setComment] = useState<any>([]);
-  const [postId, setPostId] = useState('');
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [body, setBody] = useState('');
+const FeeVoucher = () => {
+  const [studentName, setStudentName] = useState<any>([]);
+  const [selectedStudentName, setSelectedStudentName] = useState<string>('');
+  const [course, setCourse] = useState<any>([]);
+  const [grade, setGrade] = useState<any>();
+  const [selectedCourse, setSelectedCourse] = useState<string>('');
+  const [feeAmount, setFeeAmount] = useState<string>('');
+  const [payment, setPayment] = useState<string>('');
+  const [dueDate, setDueDate] = useState<string>('');
 
-  const getCommentData = () => {
-    axios.get('https://jsonplaceholder.typicode.com/comments')
-      .then((res) => {
-        console.log(res.data);
-        setComment([...res.data]);
-      }).catch((err) => {
+  useEffect(() => {
+    getData('Class Data')
+      .then((res: any) => {
+          console.log(res);
+          setStudentName(...[Object.values(res)]);
+          console.log(studentName)
+      })
+      .catch((err: any) => {
         console.log(err);
       });
-  };
-
-  const postCommentData = () => {
-    axios.post('https://jsonplaceholder.typicode.com/comments', {
-      postId,
-      name,
-      email,
-      body
-    })
-    .then((res) => {
-      console.log(res.data);
-      alert("Comment Posted")
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-  };
-
-  const deleteCommentData = () => {
-    axios.delete('https://jsonplaceholder.typicode.com/comments/1')
-      .then((res) => {
-        console.log(res.data);
-        alert("Comment Deleted")
-        setComment([]);
-      }).catch((err) => {
+    getData('Course Data')
+      .then((res: any) => {
+          console.log(res);
+          setCourse(...[Object.values(res)]);
+          console.log(studentName)
+      })
+      .catch((err: any) => {
         console.log(err);
       });
-  };
+  }, []);
 
-  const deleteComment = (i:any) => {
-    comment.splice(i, 1);
-    setComment([...comment]);
-  };
+  const handleGenerateVoucher = () => {
 
-  const putCommentData = () => {
-    axios.put('https://jsonplaceholder.typicode.com/comments/1', {
-      postId,
-      name,
-      email,
-      body
-    })
-    .then((res) => {
-      console.log(res.data);
-      alert("Comment Updated")
-    }).catch((err) => {
-      console.log(err);
-    });
+    let obj = {
+
+      StudentName: selectedStudentName,
+      Course: selectedCourse,
+      FeeAmount: feeAmount,
+      PaymentMethod:payment,
+      DueDate: dueDate,
+      Class:grade
+    };
+  
+  
+
+    sendData('Fee Data', obj)
+      .then((res: any) => {
+        console.log(res, "Voucher generated Successfully");
+      })
+      .catch((err: any) => {
+        console.log(err, "Voucher failed");
+      });
   };
 
   return (
     <>
-      <h1 className="text-center mt-3 mb-4">API CRUD COMMENT APP</h1>
-      <center>
-        <form className="container mt-4 mb-5">
-          <div className="form-group">
-            <label className="fw-bold">Post ID</label>
-            <input 
-              type="text" 
-              id="postId" 
-              className="form-control" 
-              value={postId} 
-              required
-              onChange={(e) => setPostId(e.target.value)} 
+      <div>
+        <h2 className='fw-bold text-center'>Fee Voucher Generator</h2>
+        <form>
+          <div>
+            <label className='fw-bold'>Student Name:</label>
+            <select className='form-control' onChange={(e) => setSelectedStudentName(e.target.value)}>
+              <option value="">Select Student Name</option>
+              {studentName.map((e: any, index: number) => (
+                <option key={index} value={e.value}>
+                  {e.student}
+                </option>
+              ))}
+            </select>
+          </div>
+          <br />
+          <div>
+            <label className='fw-bold'>Course</label>
+            <select className='form-control' onChange={(e) => setSelectedCourse(e.target.value)}>
+              <option value="">Select Course</option>
+              {course.map((courseItem: any, index: number) => (
+                <option key={index} value={courseItem.value}>
+                  {courseItem.course1}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <br />
+            <label className='fw-bold'>Class:</label>
+            <input
+              className='form-control'
+              type="number"
+              placeholder='Enter Class'
+              value={grade}
+              onChange={(e) => setGrade(e.target.value)}
             />
           </div>
-          <div className="form-group">
-            <label className="fw-bold">Name</label>
-            <input 
-              type="text" 
-              id="name" 
-              className="form-control" 
-              value={name} 
-              required
-              onChange={(e) => setName(e.target.value)} 
+          <div>
+            <br />
+            <label className='fw-bold'>Fee Amount:</label>
+            <input
+              className='form-control'
+              placeholder='Enter Amount'
+              type="number"
+              value={feeAmount}
+              onChange={(e) => setFeeAmount(e.target.value)}
             />
           </div>
-          <div className="form-group">
-            <label className="fw-bold">Email</label>
-            <input 
-              type="email" 
-              id="email" 
-              className="form-control"
-              required 
-              value={email} 
-              onChange={(e) => setEmail(e.target.value)} 
+          <br />
+          <div>
+            <label className='fw-bold'>Payment Method:</label>
+          <select onChange={(e) => setPayment(e.target.value)} className="form-control">
+                  <option>Select payment method</option>
+                  <option>Cash</option>
+                  <option>Credit Card</option>
+                  <option>Bank Transfer</option>
+                </select>
+          </div>
+          <br />
+          <div>
+            <label className='fw-bold'>Due Date:</label>
+            <input
+              className='form-control'
+              type="date"
+              value={dueDate}
+              onChange={(e) => setDueDate(e.target.value)}
             />
           </div>
-          <div className="form-group">
-            <label className="fw-bold">Comment</label>
-            <textarea 
-              id="body" 
-              className="form-control" 
-              required
-              value={body} 
-              onChange={(e) => setBody(e.target.value)} 
-            ></textarea>
-          </div>
+          <br />
+          <Button startIcon={<Payment/>} size='large' className='fw-bold'  variant='contained' onClick={handleGenerateVoucher}>
+            Generate Voucher
+          </Button>
         </form>
-
-        <LMS_Button className="btn fw-bold btn-primary m-1" label="Get Comment" onClick={getCommentData} type={undefined}/>
-        <LMS_Button className="btn fw-bold btn-success m-1" label="Post Comment" onClick={postCommentData} type={undefined}/>
-        <LMS_Button className="btn fw-bold btn-secondary m-1" label="Put Comment" onClick={putCommentData} type={undefined}/>
-        <LMS_Button className="btn fw-bold btn-danger m-1" label="Delete Comment" onClick={deleteCommentData} type={undefined}/>
-      </center>
-      <div className="parent-comment mt-5 container">
-        {comment.map((e:any, i:any) => (
-          <div key={i} className="card mb-5" style={{ width: '18rem' }}>
-            <ul className="list-group list-group-flush">
-              <li className="list-group-item text-center">
-                <h4 className="fw-bolder text-primary">ID<br /> {e.id} </h4>
-              </li>
-              <li className="list-group-item">
-                <label className="fw-bolder"><PostAddIcon /> Post ID:</label> <br /> {e.postId}
-              </li>
-              <li className="list-group-item">
-                <label className="fw-bolder"><AccountCircleIcon /> Name:</label> <br /> {e.name}
-              </li>
-              <li className="list-group-item">
-                <label className="fw-bolder"><MailIcon /> Email:</label> <br /> {e.email}
-              </li>
-              <li className="list-group-item">
-                <label className="fw-bolder"><CommentIcon /> Body:</label> <br /> {e.body} <br />
-              </li>
-              <li className="d-flex p-4 justify-content-center">
-                <button onClick={() => deleteComment(i)} className="fw-bold btn w-100 btn-danger">Delete</button>
-              </li>
-            </ul>
-          </div>
-        ))}
       </div>
     </>
   );
-}
+};
 
-export default Feevoucher;
+export default FeeVoucher;

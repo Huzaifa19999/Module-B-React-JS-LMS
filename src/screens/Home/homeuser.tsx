@@ -12,27 +12,32 @@
     const [students, setStudents] = useState<any>([]);
     const [teachers, setTeachers] = useState<any>([]);
     const [period, setPeriod] = useState<any>([]);
+    const [feeData, setFeeData] = useState<any>([]);
 
-    let id:any
+
 
     useEffect(() => {
       const fetchData = async () => {
         try {
           const studentData = await getData("Student Data");
           setStudents(studentData ? Object.values(studentData) : []);
-
+    
           const teacherData = await getData("Teacher Data");
           setTeachers(teacherData ? Object.values(teacherData) : []);
-
+    
+          const feeData = await getData("Fee Data");
+          setFeeData(feeData ? Object.values(feeData) : []); 
+    
           const scheduleData = await getData("Schedule data");
           setPeriod(scheduleData ? Object.values(scheduleData) : []);
         } catch (error) {
           console.error("Error fetching data:", error);
         }
       };
-
+    
       fetchData();
-    }, [id]);
+    }, []);
+    
 
     const deletedData = (id:any) => {
 
@@ -102,8 +107,8 @@
               <img src={Fees} alt="" />
               <br />
               <h5 className="mt-3 fw-bold">Fees Collection</h5>
-              <h5 className="fw-bold">Rs {students.length}</h5>
-            </Grid>
+              <h5 className="fw-bold">Rs {feeData.reduce((total: number, student: any) => total + parseFloat(student.FeeAmount), 0)}</h5>
+              </Grid>
           </Grid>
           <br />
           <br />
