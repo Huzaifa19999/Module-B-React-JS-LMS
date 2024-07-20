@@ -160,7 +160,7 @@ function Admission() {
           <LMS_Button className='btn btn-primary' onClick={sumbitData} label='Click for Admission' type={undefined} />
         </form>
     <br />
-<Link to='/home/studentlist,'><h5 className='text-center fw-bold' >Check your name in Student List</h5></Link>
+<Link to='/home/studentlist'><h5 className='text-center fw-bold' >Check your name in Student List</h5></Link>
     </div>
               </>
   )

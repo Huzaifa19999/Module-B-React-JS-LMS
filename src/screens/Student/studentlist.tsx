@@ -43,7 +43,7 @@ function Studentlist() {
     <>
    
 
-<LMS_DataGrid  className="table table-bordered table-striped text-center"
+<LMS_DataGrid  className="table bg-primary text-white aligns-items-center table-bordered table-striped text-center"
                 loading={dataLoader}
                 gridCols={[
                   {

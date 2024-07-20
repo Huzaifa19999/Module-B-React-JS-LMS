@@ -24,3 +24,9 @@
     border: solid 4px black;
     /* border-radius: 4px; */
 }
+
+
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+

@@ -51,6 +51,7 @@ const FeeVoucher = () => {
     sendData('Fee Data', obj)
       .then((res: any) => {
         console.log(res, "Voucher generated Successfully");
+        alert('Voucher Created Successfully')
       })
       .catch((err: any) => {
         console.log(err, "Voucher failed");

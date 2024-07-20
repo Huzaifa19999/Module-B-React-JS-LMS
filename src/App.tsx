@@ -1,5 +1,5 @@
-// import Approute from './config/approute'
 import Approuter from './config/router'
+// import Teacheredit from './screens/Teachers/teacheredit'
 
 
 
@@ -12,6 +12,7 @@ import Approuter from './config/router'
 
   return (
     <>
+    {/* <Teacheredit/> */}
     <Approuter/>
     </>
   

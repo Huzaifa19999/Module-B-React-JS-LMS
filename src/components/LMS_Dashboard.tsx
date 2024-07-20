@@ -35,6 +35,8 @@ import MarkAttendance from '../screens/Syllabus/syllabusform';
 import Attendancelist from '../screens/Syllabus/syllabuslist';
 import FeeVoucher from '../screens/Fees/feevoucher';
 import Examschedule from '../screens/Exam/examschedule';
+import { signOutUser } from '../config/firebaseMethods';
+import LMS_NewPassword from './LMS_NewPassword';
 
 const drawerWidth = 240;
 
@@ -116,6 +118,16 @@ export default function LMS_Dashboard() {
     setOpen(false);
   };
 
+  const logout = () => {
+    signOutUser()
+    .then(()=>{
+      navigate('/')
+    }).catch(()=>{
+      alert('Logout Failed')
+    })
+  }
+
+ 
   const [treeStructure] = React.useState([
     {
       moduleName: "Admission",
@@ -229,6 +241,7 @@ export default function LMS_Dashboard() {
         },
       ],
     },
+    
   ]);
 
   return (
@@ -251,7 +264,8 @@ export default function LMS_Dashboard() {
           <Typography onClick={() => navigate("/home/user")} className='fw-bold' variant="h4" noWrap component="div">
             Learning Management System
           </Typography>
-          <Logout onClick={() => navigate("/")} fontSize='large' />
+          {/* <Logout onClick={() => signOutUser().then(()=>{navigate('/')}) } fontSize='large' /> */}
+          <Logout onClick={logout} fontSize='large' />
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -285,6 +299,7 @@ export default function LMS_Dashboard() {
           <Route path='feevoucher' element={<FeeVoucher />} />
           <Route path='examschedule' element={<Examschedule />} />
           <Route path='examresult' element={<Examresult />} />
+          <Route path='newPassword' element={<LMS_NewPassword />} />
         </Routes>
       </Box>
     </Box>

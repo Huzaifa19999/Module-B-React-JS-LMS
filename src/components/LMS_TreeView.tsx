@@ -1,3 +1,4 @@
+import { LockReset } from '@mui/icons-material';
 import Box from '@mui/material/Box';
 import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
 import { TreeItem } from '@mui/x-tree-view/TreeItem';
@@ -15,6 +16,12 @@ export default function LMS_TreeView({ treeStructure }: any) {
     const navigateScreen = (route: string) => {
         navigate(`/home/${route}`);
     };
+
+    const changePassword = () => {
+
+        navigate('/home/newpassword')
+      }
+    
 
     return (
         <Box sx={{ minHeight: 352, minWidth: 250 }}>
@@ -38,6 +45,7 @@ export default function LMS_TreeView({ treeStructure }: any) {
                     </TreeItem>
                 ))
                     : null}
+                    <button onClick={changePassword} className=' ms-2 fs-5 btn'><LockReset/> Reset Password</button>
             </SimpleTreeView>
         </Box>
     );

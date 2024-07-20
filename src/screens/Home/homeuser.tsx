@@ -56,7 +56,7 @@
       <>
         <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>
           <Grid
-            className="ttt  rounded-4 border-5 p-4"
+            className="rounded-4 ttt border-5 p-4"
             container
             rowGap={3}
             spacing={3}
@@ -65,6 +65,7 @@
               className="text-center border rounded-4 border-3 p-5"
               item
               xs={12}
+              sm={6}
               md={3}
               lg={3}
             >
@@ -77,6 +78,7 @@
               className="text-center border rounded-4 border-3 p-5"
               item
               xs={12}
+              sm={6}
               md={3}
               lg={3}
             >
@@ -89,6 +91,7 @@
               className="text-center  border rounded-4 border-3 p-5"
               item
               xs={12}
+              sm={6}
               md={3}
               lg={3}
             >
@@ -101,6 +104,7 @@
               className="text-center border rounded-4 border-3 p-5"
               item
               xs={12}
+              sm={6}
               md={3}
               lg={3}
             >

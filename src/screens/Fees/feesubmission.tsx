@@ -1,6 +1,7 @@
 import  { useEffect, useState } from "react";
 import { deleteData, getData } from "../../config/firebaseMethods";
 import { Box } from "@mui/material";
+import '../../App.css'
 
 function Feesubmission() {
   const [feeDetails, setFeeDetails] = useState<any[]>([]);
@@ -24,8 +25,10 @@ function Feesubmission() {
     }).catch((err)=>{
       console.log(err)
     })
+  }
 
-
+  const submitFees = () => {
+    alert('Fees submit Successfully')
   }
 
   return (
@@ -61,7 +64,7 @@ function Feesubmission() {
                         <label className="fw-bold" htmlFor="paymentMethod">Payment Method: {e.PaymentMethod}</label>
                       </div>
                       <br />
-                      <button type="submit" className="btn fw-bold btn-primary">Submit</button>
+                      <button onClick={()=>submitFees} type="submit" className="btn fw-bold btn-primary">Submit</button>
                       <button onClick={()=>deleteVoucher(e.id)} type="submit" className="btn fw-bold ms-4 btn-danger">Delete</button>
                     </form>
                   </div>
