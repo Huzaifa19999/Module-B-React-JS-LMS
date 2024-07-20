@@ -270,7 +270,7 @@ export default function LMS_Dashboard() {
       </AppBar>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
-          <img className='school-logo mt-5 mb-5' src={'https://scontent.fkhi2-2.fna.fbcdn.net/v/t39.30808-6/308753025_436126298617443_3406039517104410233_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=W5tSpCgAa6UQ7kNvgEeVoys&_nc_ht=scontent.fkhi2-2.fna&oh=00_AYADkd_a9I7y4_W77V1_xaJVCImz5fzIWtA4jOqVWO_aNg&oe=668DED76'} alt="" />
+          <img className='school-logo mt-5 mb-5' src={`https://img.freepik.com/premium-vector/education-school-logo-design_586739-1335.jpg?w=740`} alt="" />
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
